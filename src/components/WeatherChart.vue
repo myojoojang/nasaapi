@@ -5,7 +5,7 @@
         <div>
           <mark class="uppercase">ATMOSPHERIC TEMPERATURE</mark>
           <v-sheet outlined class="chart-container ma-2" v-if="showChart">
-            <div v-if="atData.length < 1" class="text-center">
+            <div v-if="atData.length < 1" class="text-center primary--text">
               No data available
             </div>
             <template v-else>
@@ -20,7 +20,7 @@
         <div>
           <mark class="uppercase">Atmospheric Pressure</mark>
           <v-sheet outlined class="chart-container ma-2" v-if="showChart">
-            <div v-if="preData.length < 1" class="text-center">
+            <div v-if="preData.length < 1" class="text-center primary--text">
               No data available
             </div>
             <template v-else>
@@ -36,7 +36,7 @@
         <div>
           <mark class="uppercase">Horizontal Wind Speed</mark>
           <v-sheet outlined class="chart-container ma-2" v-if="showChart">
-            <div v-if="wsData.length < 1" class="text-center">
+            <div v-if="wsData.length < 1" class="text-center primary--text">
               No data available
             </div>
             <template v-else>
@@ -77,10 +77,10 @@
 </template>
 
 <script>
-import LineChart from './partial/LineChart.vue'
+import LineChart from "./partial/LineChart.vue";
 export default {
   components: { LineChart },
-  name: 'WeatherChart',
+  name: "WeatherChart",
   props: {
     data: { type: Array, default: null },
   },
@@ -100,60 +100,60 @@ export default {
   }),
 
   mounted() {
-    this.sortData()
+    this.sortData();
   },
   methods: {
     sortData() {
-      this.isChartLoaded = false
-      this.showChart = false
+      this.isChartLoaded = false;
+      this.showChart = false;
 
       for (let el of this.data) {
-        this.xLabels.push(el.date)
+        this.xLabels.push(el.date);
 
-        console.log(el)
+        console.log(el);
 
         if (el.PRE) {
           for (let [key, value] of Object.entries(el.PRE)) {
             this.preData.push({
               label: key,
               value: value,
-            })
+            });
           }
-          this.preChartData = this.setChartData(this.preData)
+          this.preChartData = this.setChartData(this.preData);
         }
         if (el.AT) {
           for (let [key, value] of Object.entries(el.AT)) {
             this.atData.push({
               label: key,
               value: value,
-            })
+            });
           }
-          this.atChartData = this.setChartData(this.atData)
+          this.atChartData = this.setChartData(this.atData);
         }
         if (el.HWS) {
           for (let [key, value] of Object.entries(el.HWS)) {
             this.wsData.push({
               label: key,
               value: value,
-            })
+            });
           }
-          this.wsChartData = this.setChartData(this.wsData)
+          this.wsChartData = this.setChartData(this.wsData);
         }
       }
-      this.showTimestampChart()
+      this.showTimestampChart();
     },
     setChartData(data) {
-      let tempLabel = []
+      let tempLabel = [];
       data.forEach(function (el) {
-        if (el.label !== 'ct') tempLabel.push(el.label)
-      })
+        if (el.label !== "ct") tempLabel.push(el.label);
+      });
 
-      const tempArray = tempLabel
+      const tempArray = tempLabel;
       tempLabel = Array.from(new Set(tempArray.map(JSON.stringify))).map(
-        JSON.parse,
-      )
+        JSON.parse
+      );
 
-      const putDataSet = []
+      const putDataSet = [];
       tempLabel.forEach(function (el) {
         putDataSet.push({
           label: el,
@@ -161,23 +161,23 @@ export default {
           borderWidth: 4,
           pointRadius: 4,
           fill: false,
-          borderColor: '#30DA11',
-        })
-      })
+          borderColor: "#30DA11",
+        });
+      });
 
       data.forEach(function (el) {
         putDataSet.forEach(function (it) {
-          if (el.label === it.label && el.label !== 'ct') {
-            it.data.push(el.value)
+          if (el.label === it.label && el.label !== "ct") {
+            it.data.push(el.value);
           }
-        })
-      })
+        });
+      });
       const dataSet = {
         labels: this.xLabels,
         datasets: putDataSet,
-      }
+      };
 
-      return dataSet
+      return dataSet;
     },
 
     showTimestampChart() {
@@ -188,7 +188,7 @@ export default {
             usePointStyle: true,
             fontSize: 12,
             boxWidth: 8,
-            fontColor: '#30DA11',
+            fontColor: "#30DA11",
           },
         },
         tooltips: {
@@ -199,14 +199,14 @@ export default {
             {
               stacked: false,
               ticks: {
-                fontColor: '#30DA11',
+                fontColor: "#30DA11",
                 fontSize: 12,
                 beginAtZero: false,
                 callback: (value) => {
                   if (value >= 1000) {
-                    return Intl.NumberFormat().format(value / 1000) + 'k'
+                    return Intl.NumberFormat().format(value / 1000) + "k";
                   } else {
-                    return value
+                    return value;
                   }
                 },
               },
@@ -223,7 +223,7 @@ export default {
               },
 
               ticks: {
-                fontColor: '#30DA11',
+                fontColor: "#30DA11",
                 fontSize: 12,
                 autoSkip: true,
                 autoSkipPadding: 20,
@@ -234,13 +234,13 @@ export default {
         },
         responsive: true,
         maintainAspectRatio: false,
-      }
+      };
 
-      this.isChartLoaded = true
-      this.showChart = true
+      this.isChartLoaded = true;
+      this.showChart = true;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

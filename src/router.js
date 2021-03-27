@@ -9,7 +9,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('@/components/Weather.vue'),
+      component: () => import('@/components/Landing.vue'),
     },
     {
       path: '/insight',
