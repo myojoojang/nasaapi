@@ -151,7 +151,7 @@ import axios from "axios";
 import DataBox from "./DataBox.vue";
 import Profile from "./Profile";
 import { API_KEY, API_PREFIX } from "@/GlobalVars";
-import moment from "moment";
+// import moment from "moment";
 
 export default {
   name: "CuriocityAlbum",
@@ -164,11 +164,11 @@ export default {
   data: () => ({
     data: [],
     showLoading: false,
-    solFirstDate: moment("2012-08-06"),
-    solQr: 3048, //3001=2021-01-14 // 0=2012-08-06
+    // solFirstDate: moment("2012-08-06"),
+    solQr: 2111,
     roverQr: "",
     page: 1,
-    selDate: 3048,
+    selDate: 2111,
     selecetedRoverType: {},
     roverTypes: [
       { name: "ALL", value: 0 },
