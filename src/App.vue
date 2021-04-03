@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import MainView from './components/MainView'
+import MainView from "./components/MainView";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
     MainView,
@@ -24,12 +24,11 @@ export default {
   },
 
   methods: {},
-}
+};
 </script>
 <style>
 * {
-  font-family: 'Source Code Pro', monospace;
- 
+  font-family: "Zilla Slab", serif;
 }
 body {
   -webkit-transition: all 0.6s ease;
