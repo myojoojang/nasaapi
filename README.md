@@ -1,7 +1,6 @@
 # NASA API EXPERIMENT
 
-
-[demo](https://nasaapiexp.netlify.app/#/)
+## [demo](https://nasaapiexp.netlify.app/#/)
 
 - had some fun w/ nasa api and simple charts
 - vue
