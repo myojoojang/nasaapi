@@ -165,10 +165,10 @@ export default {
     data: [],
     showLoading: false,
     // solFirstDate: moment("2012-08-06"),
-    solQr: 2111,
+    solQr: 2998,
     roverQr: "",
     page: 1,
-    selDate: 2111,
+    selDate: 2998,
     selecetedRoverType: {},
     roverTypes: [
       { name: "ALL", value: 0 },

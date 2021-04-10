@@ -18,12 +18,6 @@ export default {
     data: [],
     showLoading: false,
   }),
-  beforeMount() {
-    // this.showLoading = true
-    // this.getData()
-  },
-
-  methods: {},
 };
 </script>
 <style>
@@ -78,7 +72,7 @@ mark {
 }
 
 .bold-outline {
-  border: 3px solid #39ff14 !important;
+  border: 2px solid #39ff14 !important;
   margin: 2px;
 }
 

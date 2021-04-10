@@ -158,10 +158,12 @@ export default {
         putDataSet.push({
           label: el,
           data: [],
-          borderWidth: 4,
-          pointRadius: 4,
+          borderWidth: 3,
+          pointRadius: 3,
           fill: false,
           borderColor: "#30DA11",
+          pointHoverBackgroundColor: "#30DA11",
+          pointHoverRadius: 6,
         });
       });
 
@@ -194,6 +196,7 @@ export default {
         tooltips: {
           displayColors: false,
         },
+
         scales: {
           yAxes: [
             {
@@ -228,6 +231,9 @@ export default {
                 autoSkip: true,
                 autoSkipPadding: 20,
                 maxRotation: 0,
+                callback: (value) => {
+                  return "SOL" + value;
+                },
               },
             },
           ],
