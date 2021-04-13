@@ -17,7 +17,7 @@
     <v-dialog
       scrollable
       persistent
-      width="50vw"
+      width="80vw"
       max-width="800px"
       v-model="isDetailDlgOpen"
     >
