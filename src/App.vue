@@ -24,11 +24,17 @@ export default {
 * {
   font-family: "Zilla Slab", serif;
 }
+
 body {
   -webkit-transition: all 0.6s ease;
   -moz-transition: all 0.6s ease;
   -o-transition: all 0.6s ease;
   transition: all 0.6s ease;
+}
+
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body .theme--dark.v-application {
