@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="d-flex justify-space-between align-center mx-4">
-      <h1>APOD: Astronomy Picture of the Day</h1>
+      <h1>APOD: Astronomy Picture of the Day : {{ today }}</h1>
       <!-- 
     <div class="textover">
       <div v-for="(val, key) in data" :key="key">{{ key }}: {{ val }}</div>
@@ -39,12 +39,14 @@ export default {
   data: () => ({
     data: "",
     isDetailDlgOpen: false,
+    today: "",
   }),
   components: {
     DetailDlg,
   },
-  beforeMount() {
+  created() {
     this.getData();
+    this.today = new Date().toLocaleDateString();
   },
   methods: {
     getData() {
