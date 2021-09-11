@@ -6,7 +6,7 @@
 
     <v-card-text class="pa-8 primary--text">
       <template v-if="data.img_src || data.url">
-        <v-img :src="data.img_src || data.url" />
+        <v-img :src="data.img_src || data.url"  aspect-ratio="2" />
       </template>
       <div class="mt-2" v-for="(val, key) in data" :key="key">
         <span class="uppercase font-weight-bold"> {{ key }} </span>
