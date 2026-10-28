@@ -5,9 +5,14 @@
         text
         color="primary"
         aria-label="Close details"
+        min-width="56"
+        height="56"
         @click="$emit('close')"
       >
-        ×
+        <span
+          class="close-icon"
+          aria-hidden="true"
+        >×</span>
       </v-btn>
     </div>
     <v-card-text class="pa-8 primary--text">
@@ -90,6 +95,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.close-icon {
+  font-size: 2.25rem;
+  line-height: 1;
+}
 .metadata-value {
   overflow-wrap: anywhere;
 }
