@@ -17,13 +17,22 @@ export interface LibraryImage {
   date_created?: string;
   description?: string;
   center?: string;
-  keywords?: string[];
   previewUrl: string;
 }
 
 export interface LibraryImageSearch {
   images: LibraryImage[];
   hasNextPage: boolean;
+}
+
+export interface ImageLibrarySearchResponse {
+  collection: {
+    items: Array<{
+      data?: Array<Omit<LibraryImage, 'previewUrl'>>;
+      links?: Array<{ href: string; rel: string; render?: string }>;
+    }>;
+    links?: Array<{ rel: string }>;
+  };
 }
 
 export interface WeatherMeasurement {
@@ -34,7 +43,6 @@ export interface WeatherMeasurement {
 }
 
 export interface SolWeather {
-  First_UTC?: string;
   Last_UTC?: string;
   Northern_season?: string;
   Southern_season?: string;

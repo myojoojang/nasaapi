@@ -20,10 +20,14 @@ export default new VueRouter({
       },
     },
     {
-      path: '/marsphotos',
+      path: '/images',
       component: () => {
         return import('./views/ImageLibraryView.vue');
       },
+    },
+    {
+      path: '/marsphotos',
+      redirect: '/images',
     },
   ],
 });

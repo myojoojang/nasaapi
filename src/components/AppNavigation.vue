@@ -20,7 +20,7 @@
         </router-link>
       </v-card>
       <div class="px-4 hover bold-outline">
-        <router-link to="/marsphotos">
+        <router-link to="/images">
           NASA Images
         </router-link>
       </div>

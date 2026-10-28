@@ -1,6 +1,6 @@
 # NASA API Experiment
 
-A Vue dashboard for NASA’s Astronomy Picture of the Day (APOD), InSight weather reports, and NASA library images. The original green-on-black visual style and `#/`, `#/insight`, and `#/marsphotos` routes are retained.
+A Vue dashboard for NASA’s Astronomy Picture of the Day (APOD), InSight weather reports, and NASA library images. The original green-on-black visual style and `#/` and `#/insight` remain; `#/images` is the image route, with `#/marsphotos` redirected for existing links.
 
 ## Development
 
@@ -25,7 +25,7 @@ src/
   services/nasaApi.ts   Typed NASA requests
   types/nasa.ts         NASA response shapes
   utils/                Weather data formatting and safe media URLs
-  router.ts             Existing hash routes
+  router.ts             Hash routes and the old image URL redirect
   styles/app.css        Original green-on-black theme
 ```
 

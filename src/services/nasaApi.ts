@@ -1,7 +1,7 @@
 import type {
   AstronomyPicture,
   InsightWeatherResponse,
-  LibraryImage,
+  ImageLibrarySearchResponse,
   LibraryImageSearch,
 } from '../types/nasa';
 
@@ -44,17 +44,7 @@ export const nasaApi = {
     });
   },
   async searchLibraryImages(searchTerms: string, page: number): Promise<LibraryImageSearch> {
-    interface SearchResponse {
-      collection: {
-        items: Array<{
-          data?: Array<Omit<LibraryImage, 'previewUrl'>>;
-          links?: Array<{ href: string; rel: string; render?: string }>;
-        }>;
-        links?: Array<{ rel: string }>;
-      };
-    }
-
-    const response = await fetchNasaJson<SearchResponse>(IMAGE_LIBRARY_URL, {
+    const response = await fetchNasaJson<ImageLibrarySearchResponse>(IMAGE_LIBRARY_URL, {
       q: searchTerms,
       media_type: 'image',
       page: String(page),
