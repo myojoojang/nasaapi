@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-end my-4">
+  <div class="pagination-controls d-flex justify-end my-4">
     <v-btn
       outlined
       width="100px"
@@ -42,3 +42,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.pagination-controls {
+  gap: 8px;
+}
+</style>

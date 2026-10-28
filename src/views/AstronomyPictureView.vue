@@ -1,18 +1,17 @@
 <template>
-  <div>
-    <div class="mx-4">
-      <h1>
-        APOD: Astronomy Picture of the Day :
-        {{ astronomyPicture ? astronomyPicture.date : today }}
-      </h1>
-    </div>
-
+  <div class="page-view">
+    <header class="page-heading">
+      <h1>APOD: Astronomy Picture of the Day</h1>
+      <p>
+        {{ astronomyPicture ? astronomyPicture.date : today }} · NASA’s daily view of the universe.
+      </p>
+    </header>
     <v-alert
       v-if="pictureLoadError"
       type="error"
       outlined
       role="alert"
-      class="ma-4"
+      class="mb-4"
     >
       {{ pictureLoadError }}
       <v-btn
@@ -24,29 +23,36 @@
       </v-btn>
     </v-alert>
     <template v-if="astronomyPicture">
-      <div
-        v-if="astronomyPicture.media_type !== 'image'"
-        class="pa-4"
-      >
-        <span>{{ pictureTitle }}</span>
-      </div>
-      <v-btn
+      <v-card
         outlined
-        color="primary"
-        class="ma-4"
-        aria-label="View astronomy picture details"
-        @click="isDetailsOpen = true"
+        class="apod-panel"
       >
-        View details
-      </v-btn>
-      <v-img
-        v-if="pictureImageUrl"
-        class="pointer"
-        :src="pictureImageUrl"
-        :alt="pictureTitle"
-        aspect-ratio="2"
-        @click="isDetailsOpen = true"
-      />
+        <div class="apod-panel-header">
+          <h2>{{ pictureTitle }}</h2>
+          <v-btn
+            outlined
+            color="primary"
+            aria-label="View astronomy picture details"
+            @click="isDetailsOpen = true"
+          >
+            View details
+          </v-btn>
+        </div>
+        <v-img
+          v-if="pictureImageUrl"
+          class="pointer"
+          :src="pictureImageUrl"
+          :alt="pictureTitle"
+          aspect-ratio="2"
+          @click="isDetailsOpen = true"
+        />
+        <p
+          v-if="astronomyPicture.media_type !== 'image'"
+          class="apod-video-note"
+        >
+          Open details to watch this video on NASA.
+        </p>
+      </v-card>
       <v-dialog
         v-model="isDetailsOpen"
         scrollable
@@ -64,12 +70,12 @@
         />
       </v-dialog>
     </template>
-    <p
+    <div
       v-else-if="!isLoadingPicture && !pictureLoadError"
-      class="pa-4"
+      class="empty-state"
     >
       No astronomy picture available.
-    </p>
+    </div>
   </div>
 </template>
 
@@ -140,3 +146,27 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.apod-panel {
+  overflow: hidden;
+}
+.apod-panel-header {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 20px;
+}
+.apod-panel-header h2 {
+  font-size: 1.3rem;
+  line-height: 1.3;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.apod-video-note {
+  color: var(--nasa-muted);
+  padding: 20px;
+}
+</style>

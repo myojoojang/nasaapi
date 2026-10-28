@@ -1,6 +1,10 @@
 <template>
-  <v-card outlined>
-    <div class="d-flex justify-end align-center">
+  <v-card
+    outlined
+    class="details-card"
+  >
+    <header class="details-header">
+      <h2>{{ title }}</h2>
       <v-btn
         text
         color="primary"
@@ -14,31 +18,36 @@
           aria-hidden="true"
         >×</span>
       </v-btn>
-    </div>
-    <v-card-text class="pa-8 primary--text">
+    </header>
+    <v-card-text class="details-content">
       <v-img
         v-if="imageUrl"
         :src="imageUrl"
         :alt="title"
         aspect-ratio="2"
+        class="mb-4"
       />
-      <h2>{{ title }}</h2>
-      <div
-        v-for="field in metadataFields"
-        :key="field.name"
-        class="mt-2"
-      >
-        <span class="uppercase font-weight-bold">{{ field.name }}</span>
-        <span class="metadata-value"> | {{ field.value }}</span>
-      </div>
-      <a
+      <dl>
+        <div
+          v-for="field in metadataFields"
+          :key="field.name"
+          class="detail-row"
+        >
+          <dt>{{ field.name }}</dt>
+          <dd>{{ field.value }}</dd>
+        </div>
+      </dl>
+      <v-btn
         v-if="sourceUrl"
+        outlined
+        color="primary"
         :href="sourceUrl"
         target="_blank"
         rel="noopener noreferrer"
+        class="mt-4"
       >
         Open on NASA
-      </a>
+      </v-btn>
     </v-card-text>
   </v-card>
 </template>
@@ -71,21 +80,22 @@ export default defineComponent({
   },
   computed: {
     metadataFields(): { name: string; value: string }[] {
-      return Object.entries(this.metadata).filter(([name]) => {
-        return name !== 'basic_html';
+      const hiddenFields = new Set([
+        'basic_html',
+        'title',
+        'url',
+        'hdurl',
+        'permalink',
+        'media_type',
+      ]);
+
+      return Object.entries(this.metadata).filter(([name, value]) => {
+        return !hiddenFields.has(name) && value !== null && value !== undefined && value !== '';
       }).map(([name, value]) => {
-        let displayValue = String(value ?? 'N/D');
-
-        if (typeof value === 'object' && value !== null) {
-          displayValue = JSON.stringify(value);
-        }
-
-        if (['explanation', 'copyright', 'credit', 'title', 'alt', 'Description'].includes(name)) {
-          displayValue = plainTextFromHtml(displayValue);
-        }
+        const displayValue = typeof value === 'string' ? plainTextFromHtml(value) : String(value);
 
         return {
-          name,
+          name: name.replaceAll('_', ' '),
           value: displayValue,
         };
       });
@@ -95,11 +105,52 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.details-card {
+  background: var(--nasa-surface);
+}
+.details-header {
+  align-items: center;
+  border-bottom: 1px solid var(--nasa-border);
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 8px 16px 8px 24px;
+}
+.details-header h2 {
+  color: var(--nasa-accent);
+  font-size: 1.35rem;
+  line-height: 1.3;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
 .close-icon {
   font-size: 2.25rem;
   line-height: 1;
 }
-.metadata-value {
+.details-content {
+  padding: 24px;
+}
+.detail-row {
+  border-bottom: 1px solid var(--nasa-border);
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(110px, 150px) minmax(0, 1fr);
+  padding: 12px 0;
+}
+.detail-row dt {
+  color: var(--nasa-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.detail-row dd {
+  color: var(--nasa-muted);
+  margin: 0;
   overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .detail-row {
+    gap: 4px;
+    grid-template-columns: 1fr;
+  }
 }
 </style>

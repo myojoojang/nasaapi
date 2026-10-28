@@ -1,10 +1,11 @@
 <template>
   <v-col
     cols="12"
-    md="2"
+    md="4"
+    lg="3"
   >
     <v-card
-      class="pa-2"
+      class="pa-4 weather-card"
       outlined
       height="100%"
     >
@@ -105,3 +106,9 @@ export default defineComponent({
   methods: { formatWeatherValue },
 });
 </script>
+
+<style scoped>
+.weather-card {
+  overflow-wrap: anywhere;
+}
+</style>

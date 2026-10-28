@@ -1,13 +1,13 @@
 <template>
-  <div class="pa-4">
-    <header class="library-heading">
-      <h1 class="uppercase">
+  <div class="page-view">
+    <header class="page-heading">
+      <h1>
         NASA Image Library
       </h1>
       <p>Search NASA’s collection of Mars rover images and other photographs.</p>
     </header>
     <section
-      class="search-panel"
+      class="search-panel page-panel"
       aria-label="Search NASA images"
     >
       <form
@@ -70,7 +70,7 @@
       type="error"
       outlined
       role="alert"
-      class="my-4"
+      class="mb-4"
     >
       {{ imagesLoadError }}
       <v-btn
@@ -99,12 +99,9 @@
           v-if="!images.length && !isLoadingImages"
           cols="12"
         >
-          <v-card
-            outlined
-            class="pa-8 text-center"
-          >
+          <div class="empty-state">
             No images found for “{{ searchTerms }}”. Try another search.
-          </v-card>
+          </div>
         </v-col>
       </v-row>
       <ImageLibraryPagination
@@ -217,23 +214,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.library-heading, .search-panel {
-  max-width: 960px;
-}
-.library-heading {
-  margin-bottom: 24px;
-}
-.library-heading h1 {
-  margin-bottom: 8px;
-}
-.library-heading p {
-  color: #c1d7bc;
-  line-height: 1.5;
-}
 .search-panel {
-  background: #1b1b1b;
-  border: 1px solid #426a3c;
-  padding: 20px;
+  max-width: 960px;
 }
 .image-search {
   align-items: end;

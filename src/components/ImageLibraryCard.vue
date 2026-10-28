@@ -6,7 +6,7 @@
     <v-card
       outlined
       height="100%"
-      class="my-2 d-flex flex-column"
+      class="my-2 d-flex flex-column image-card"
     >
       <v-card-text class="flex-grow-1">
         <v-img
@@ -15,8 +15,10 @@
           aspect-ratio="1.7"
         />
         <div class="primary--text mt-4">
-          <h4>{{ image.title }}</h4>
-          <p class="ma-0">
+          <h2 class="image-card-title">
+            {{ image.title }}
+          </h2>
+          <p class="image-card-meta ma-0">
             {{ image.center || 'NASA' }} · {{ imageDate }}
           </p>
         </div>
@@ -91,3 +93,15 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.image-card-title {
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+.image-card-meta {
+  color: var(--nasa-muted);
+}
+</style>

@@ -1,10 +1,11 @@
 <template>
-  <div class="pa-4">
+  <div class="page-view">
     <v-alert
       v-if="weatherLoadError"
       type="error"
       outlined
       role="alert"
+      class="mb-4"
     >
       {{ weatherLoadError }}
       <v-btn
@@ -16,29 +17,16 @@
       </v-btn>
     </v-alert>
     <InsightWeatherOverview :weather-reports="weatherReports" />
-    <p
+    <div
       v-if="!weatherReports.length && !isLoadingWeather && !weatherLoadError"
-      class="my-4"
+      class="empty-state"
     >
       No weather reports are currently available from NASA.
-    </p>
-    <v-row class="mt-2">
-      <v-col
-        cols="12"
-        md="2"
-      >
-        <v-card
-          class="pa-4"
-          outlined
-          height="100%"
-        >
-          <mark>Notice</mark>
-          <p>
-            These reports come from the NASA InSight archive.
-            Missing sensor measurements display N/D.
-          </p>
-        </v-card>
-      </v-col>
+    </div>
+    <v-row
+      v-if="weatherReports.length"
+      class="mt-2"
+    >
       <InsightWeatherCard
         v-for="report in weatherReports"
         :key="report.sol"

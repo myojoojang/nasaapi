@@ -1,11 +1,7 @@
 <template>
   <div>
-    <v-card
-      class="pa-4 mb-4"
-    >
-      <h1 class="uppercase mb-2">
-        InSight: Mars Weather Service API
-      </h1>
+    <header class="page-heading">
+      <h1>InSight: Mars Weather Service API</h1>
       <p>Per-sol summaries from the last available Martian days.</p>
       <p>Missing sensor readings appear as gaps in the charts.</p>
       <a
@@ -15,7 +11,7 @@
       >
         NASA InSight mission archive
       </a>
-    </v-card>
+    </header>
     <v-row v-if="weatherReports.length">
       <v-col
         v-for="chart in weatherCharts"
