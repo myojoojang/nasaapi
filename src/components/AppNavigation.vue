@@ -15,6 +15,14 @@
     </div>
     <div class="nav-tabs d-flex align-center flex-wrap">
       <router-link
+        to="/"
+        exact
+        class="nav-tab"
+        exact-active-class="nav-tab--active"
+      >
+        APOD: Astronomy Picture of the Day
+      </router-link>
+      <router-link
         to="/insight"
         class="nav-tab"
         exact-active-class="nav-tab--active"
@@ -63,7 +71,9 @@ export default defineComponent({ name: 'AppNavigation' });
   justify-content: center;
   min-height: 52px;
   min-width: 140px;
+  max-width: 100%;
   padding: 0 18px;
+  text-align: center;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 .nav-tab:hover, .nav-tab:focus-visible, .nav-tab--active {
