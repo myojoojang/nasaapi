@@ -1,19 +1,10 @@
 <template>
   <div>
-    <div class="d-flex justify-space-between align-center mx-4">
+    <div class="mx-4">
       <h1>
         APOD: Astronomy Picture of the Day :
         {{ astronomyPicture ? astronomyPicture.date : today }}
       </h1>
-      <v-btn
-        v-if="astronomyPicture"
-        text
-        color="primary"
-        aria-label="Open picture details"
-        @click="isDetailsOpen = true"
-      >
-        +
-      </v-btn>
     </div>
     <v-progress-linear
       v-if="isLoadingPicture"
@@ -61,6 +52,15 @@
           Watch on NASA
         </v-btn>
       </div>
+      <v-btn
+        outlined
+        color="primary"
+        class="ma-4"
+        aria-label="View astronomy picture details"
+        @click="isDetailsOpen = true"
+      >
+        View details
+      </v-btn>
       <v-dialog
         v-model="isDetailsOpen"
         scrollable

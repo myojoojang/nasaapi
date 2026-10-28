@@ -6,10 +6,9 @@
     <v-card
       outlined
       height="100%"
-      class="my-2"
-      @click="isDetailsOpen = true"
+      class="my-2 d-flex flex-column"
     >
-      <v-card-text>
+      <v-card-text class="flex-grow-1">
         <v-img
           :src="imageUrl"
           :alt="image.title"
@@ -22,6 +21,16 @@
           </p>
         </div>
       </v-card-text>
+      <div class="d-flex justify-end pa-4">
+        <v-btn
+          outlined
+          color="primary"
+          :aria-label="`View details for ${image.title}`"
+          @click="isDetailsOpen = true"
+        >
+          View details
+        </v-btn>
+      </div>
     </v-card>
     <v-dialog
       v-model="isDetailsOpen"
