@@ -2,10 +2,6 @@
   font-family: "Zilla Slab", serif;
 }
 
-body {
-  transition: all 0.6s ease;
-}
-
 body::-webkit-scrollbar {
   display: none;
 }
@@ -49,11 +45,6 @@ mark {
 }
 .small-text {
   font-size: 0.8rem;
-}
-
-.bold-outline {
-  border: 2px solid #39ff14 !important;
-  margin: 2px;
 }
 
 .pointer {
