@@ -1,69 +1,85 @@
 <template>
   <div class="pa-4">
-    <h1 class="uppercase">
-      NASA Image Library
-    </h1>
-    <p>Search NASA’s image and video library for Mars rover images and other NASA photographs.</p>
-    <form
-      class="image-search d-flex align-center flex-wrap"
-      @submit.prevent="searchImages"
+    <header class="library-heading">
+      <h1 class="uppercase">
+        NASA Image Library
+      </h1>
+      <p>Search NASA’s collection of Mars rover images and other photographs.</p>
+    </header>
+    <section
+      class="search-panel"
+      aria-label="Search NASA images"
     >
-      <v-text-field
-        v-model="searchInput"
-        label="Search NASA images"
-        aria-label="Search NASA images"
-        hide-details
-        dense
-        outlined
-        color="primary"
-        :disabled="isLoadingImages"
-      />
-      <v-btn
-        type="submit"
-        color="primary"
-        class="black--text font-weight-bold ma-2"
-        :disabled="isLoadingImages"
+      <form
+        class="image-search"
+        @submit.prevent="searchImages"
       >
-        Search
-      </v-btn>
-    </form>
-    <p
-      v-if="searchValidationError"
-      role="alert"
-    >
-      {{ searchValidationError }}
-    </p>
-    <div class="d-flex align-center flex-wrap my-4">
-      <h3 class="uppercase ma-2">
-        Mars rover searches
-      </h3>
-      <button
-        v-for="rover in roverSearches"
-        :key="rover"
-        type="button"
-        class="rover-option px-4 ma-1 font-weight-bold"
-        :aria-pressed="searchTerms === rover"
-        :class="{ 'primary black--text': searchTerms === rover }"
-        :disabled="isLoadingImages"
-        @click="selectRoverSearch(rover)"
+        <div class="search-field">
+          <label
+            for="nasa-image-search"
+            class="field-label"
+          >Search images</label>
+          <input
+            id="nasa-image-search"
+            v-model="searchInput"
+            type="search"
+            class="search-input"
+            placeholder="e.g. Curiosity rover"
+            :disabled="isLoadingImages"
+          >
+        </div>
+        <v-btn
+          type="submit"
+          color="primary"
+          class="search-button black--text font-weight-bold"
+          height="44"
+          min-width="120"
+          :disabled="isLoadingImages"
+        >
+          Search
+        </v-btn>
+      </form>
+      <p
+        v-if="searchValidationError"
+        class="search-error"
+        role="alert"
       >
-        {{ rover }}
-      </button>
+        {{ searchValidationError }}
+      </p>
+      <div class="preset-searches">
+        <span class="field-label">Quick searches</span>
+        <div class="preset-buttons">
+          <button
+            v-for="rover in roverSearches"
+            :key="rover"
+            type="button"
+            class="rover-option"
+            :aria-pressed="searchTerms === rover"
+            :class="{ 'rover-option--active': searchTerms === rover }"
+            :disabled="isLoadingImages"
+            @click="selectRoverSearch(rover)"
+          >
+            {{ rover }}
+          </button>
+        </div>
+      </div>
+    </section>
+    <div class="source-note">
+      <p>NASA’s image library does not support sol or camera filters.</p>
+      <p>
+        Browse raw rover images on NASA:
+        <a
+          href="https://mars.nasa.gov/msl/multimedia/raw-images/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Curiosity</a> ·
+        <a
+          href="https://mars.nasa.gov/mars2020/multimedia/raw-images/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Perseverance</a>.
+      </p>
     </div>
-    <p class="small-text">
-      Results come from NASA’s general media library. Sol and camera filters are unavailable here.
-      For mission raw images, browse
-      <a
-        href="https://mars.nasa.gov/msl/multimedia/raw-images/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >Curiosity</a> or
-      <a
-        href="https://mars.nasa.gov/mars2020/multimedia/raw-images/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >Perseverance</a>.
-    </p>
     <v-progress-linear
       v-if="isLoadingImages"
       indeterminate
@@ -87,6 +103,7 @@
     </v-alert>
     <template v-if="!imagesLoadError">
       <ImageLibraryPagination
+        v-if="hasNextPage || currentPage > 1"
         :page="currentPage"
         :has-next-page="hasNextPage"
         :is-loading="isLoadingImages"
@@ -98,17 +115,20 @@
           :key="image.nasa_id"
           :image="image"
         />
-        <v-card
+        <v-col
           v-if="!images.length && !isLoadingImages"
-          outlined
-          height="400px"
-          width="100%"
-          class="text-center ma-4"
+          cols="12"
         >
-          No images found
-        </v-card>
+          <v-card
+            outlined
+            class="pa-8 text-center"
+          >
+            No images found for “{{ searchTerms }}”. Try another search.
+          </v-card>
+        </v-col>
       </v-row>
       <ImageLibraryPagination
+        v-if="hasNextPage || currentPage > 1"
         :page="currentPage"
         :has-next-page="hasNextPage"
         :is-loading="isLoadingImages"
@@ -209,18 +229,114 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.library-heading, .search-panel, .source-note {
+  max-width: 960px;
+}
+.library-heading {
+  margin-bottom: 24px;
+}
+.library-heading h1 {
+  margin-bottom: 8px;
+}
+.library-heading p, .source-note {
+  color: #c1d7bc;
+  line-height: 1.5;
+}
+.search-panel {
+  background: #1b1b1b;
+  border: 1px solid #426a3c;
+  padding: 20px;
+}
 .image-search {
-  max-width: 700px;
+  align-items: end;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.search-field {
+  min-width: 0;
+}
+.field-label {
+  color: #c1d7bc;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.search-input {
+  background: #121212;
+  border: 1px solid #738a70;
+  border-radius: 0;
+  color: #fff;
+  font-size: 1rem;
+  height: 44px;
+  padding: 0 14px;
+  width: 100%;
+}
+.search-input:focus-visible {
+  border-color: #39ff14;
+  outline: 2px solid #39ff14;
+  outline-offset: 2px;
+}
+.search-input:disabled, .rover-option:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.search-error {
+  color: #ff8a80;
+  margin-top: 10px;
+}
+.preset-searches {
+  margin-top: 20px;
+}
+.preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 .rover-option {
-  border: 1px solid #39ff14;
+  background: transparent;
+  border: 1px solid #738a70;
   color: #39ff14;
-  min-height: 40px;
-}
-.rover-option:hover {
+  font-size: 0.9rem;
   font-weight: 700;
+  min-height: 40px;
+  padding: 8px 14px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.rover-option:hover, .rover-option:focus-visible {
+  background: #294125;
+  border-color: #39ff14;
+}
+.rover-option--active, .rover-option--active:hover {
+  background: #39ff14;
+  border-color: #39ff14;
+  color: #111;
 }
 .rover-option:focus-visible {
-  outline: 2px solid #39ff14;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.source-note {
+  font-size: 0.95rem;
+  margin: 16px 0 24px;
+}
+.source-note a {
+  color: #39ff14;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .search-panel {
+    padding: 16px;
+  }
+  .image-search {
+    grid-template-columns: 1fr;
+  }
+  .search-button {
+    width: 100%;
+  }
 }
 </style>
