@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="page-heading">
-      <h1>InSight Weather Archive</h1>
+      <h1>InSight Mars Weather Archive</h1>
       <p>NASA’s last available reports: October 20–26, 2020 (sols 675–681).</p>
       <p>Missing sensor readings appear as gaps in the charts.</p>
       <a
@@ -9,7 +9,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        NASA InSight mission archive
+        NASA InSight Mars mission archive
       </a>
     </header>
     <v-row v-if="weatherReports.length">
