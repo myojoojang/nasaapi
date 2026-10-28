@@ -64,27 +64,7 @@
         </div>
       </div>
     </section>
-    <div class="source-note">
-      <p>NASA’s image library does not support sol or camera filters.</p>
-      <p>
-        Browse raw rover images on NASA:
-        <a
-          href="https://mars.nasa.gov/msl/multimedia/raw-images/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Curiosity</a> ·
-        <a
-          href="https://mars.nasa.gov/mars2020/multimedia/raw-images/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Perseverance</a>.
-      </p>
-    </div>
-    <v-progress-linear
-      v-if="isLoadingImages"
-      indeterminate
-      aria-label="Loading NASA images"
-    />
+
     <v-alert
       v-if="imagesLoadError"
       type="error"
@@ -145,7 +125,12 @@ import { nasaApi } from '@/services/nasaApi';
 import ImageLibraryCard from '@/components/ImageLibraryCard.vue';
 import ImageLibraryPagination from '@/components/ImageLibraryPagination.vue';
 
-const ROVER_SEARCHES = ['Curiosity rover', 'Perseverance rover', 'Opportunity rover', 'Spirit rover'];
+const ROVER_SEARCHES = [
+  'Curiosity rover',
+  'Perseverance rover',
+  'Opportunity rover',
+  'Spirit rover',
+];
 
 interface ImageLibraryState {
   images: LibraryImage[];
@@ -192,7 +177,10 @@ export default defineComponent({
       this.hasNextPage = false;
 
       try {
-        const result = await nasaApi.searchLibraryImages(this.searchTerms, this.currentPage);
+        const result = await nasaApi.searchLibraryImages(
+          this.searchTerms,
+          this.currentPage,
+        );
 
         this.images = result.images;
         this.hasNextPage = result.hasNextPage;
@@ -229,7 +217,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.library-heading, .search-panel, .source-note {
+.library-heading, .search-panel {
   max-width: 960px;
 }
 .library-heading {
@@ -238,7 +226,7 @@ export default defineComponent({
 .library-heading h1 {
   margin-bottom: 8px;
 }
-.library-heading p, .source-note {
+.library-heading p {
   color: #c1d7bc;
   line-height: 1.5;
 }
@@ -318,15 +306,6 @@ export default defineComponent({
 .rover-option:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
-}
-.source-note {
-  font-size: 0.95rem;
-  margin: 16px 0 24px;
-}
-.source-note a {
-  color: #39ff14;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 @media (max-width: 600px) {
   .search-panel {

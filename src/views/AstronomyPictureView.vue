@@ -6,11 +6,7 @@
         {{ astronomyPicture ? astronomyPicture.date : today }}
       </h1>
     </div>
-    <v-progress-linear
-      v-if="isLoadingPicture"
-      indeterminate
-      aria-label="Loading astronomy picture"
-    />
+
     <v-alert
       v-if="pictureLoadError"
       type="error"
@@ -28,6 +24,12 @@
       </v-btn>
     </v-alert>
     <template v-if="astronomyPicture">
+      <div
+        v-if="astronomyPicture.media_type !== 'image'"
+        class="pa-4"
+      >
+        <span>{{ pictureTitle }}</span>
+      </div>
       <v-btn
         outlined
         color="primary"
@@ -45,22 +47,6 @@
         aspect-ratio="2"
         @click="isDetailsOpen = true"
       />
-      <div
-        v-if="astronomyPicture.media_type !== 'image'"
-        class="pa-4"
-      >
-        <p>{{ pictureTitle }}</p>
-        <v-btn
-          v-if="pictureSourceUrl"
-          outlined
-          color="primary"
-          :href="pictureSourceUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Watch on NASA
-        </v-btn>
-      </div>
       <v-dialog
         v-model="isDetailsOpen"
         scrollable

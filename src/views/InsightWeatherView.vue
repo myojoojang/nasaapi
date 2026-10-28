@@ -1,10 +1,5 @@
 <template>
   <div class="pa-4">
-    <v-progress-linear
-      v-if="isLoadingWeather"
-      indeterminate
-      aria-label="Loading Mars weather"
-    />
     <v-alert
       v-if="weatherLoadError"
       type="error"
