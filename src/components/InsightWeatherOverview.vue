@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-card
-      outlined
       class="pa-4 mb-4"
     >
       <h1 class="uppercase mb-2">
@@ -85,7 +84,10 @@ export default defineComponent({
       ] as const;
 
       return metricCharts.map((metricChart) => {
-        const chartData = buildWeatherChartData(this.weatherReports, metricChart.metric);
+        const chartData = buildWeatherChartData(
+          this.weatherReports,
+          metricChart.metric,
+        );
         const hasMeasurements = chartData.datasets.some((dataset) => {
           return dataset.data.some((value) => {
             return value !== null;
