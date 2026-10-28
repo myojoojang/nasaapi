@@ -92,7 +92,7 @@ import { defineComponent } from 'vue';
 import type { AstronomyPicture } from '@/types/nasa';
 import { nasaApi } from '@/services/nasaApi';
 import { getAstronomyImageUrl, safeMediaUrl, plainTextFromHtml } from '@/utils/media';
-import MediaDetailsDialog from '@/components/media/MediaDetailsDialog.vue';
+import MediaDetailsDialog from '@/components/MediaDetailsDialog.vue';
 
 interface AstronomyState {
   astronomyPicture: AstronomyPicture | null;

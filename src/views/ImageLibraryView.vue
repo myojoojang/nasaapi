@@ -122,8 +122,8 @@
 import { defineComponent } from 'vue';
 import type { LibraryImage } from '@/types/nasa';
 import { nasaApi } from '@/services/nasaApi';
-import LibraryImageCard from '@/features/images/LibraryImageCard.vue';
-import ImageSearchPagination from '@/features/images/ImageSearchPagination.vue';
+import LibraryImageCard from '@/components/LibraryImageCard.vue';
+import ImageSearchPagination from '@/components/ImageSearchPagination.vue';
 
 const ROVER_SEARCHES = ['Curiosity rover', 'Perseverance rover', 'Opportunity rover', 'Spirit rover'];
 

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { getDailyWeatherReports, buildWeatherChartData, formatWeatherValue } from '../src/features/insight/weatherData';
+import { getDailyWeatherReports, buildWeatherChartData, formatWeatherValue } from '../src/utils/insightWeather';
 import type { DailyWeather } from '../src/types/nasa';
 
 test('weather reports follow sol_keys, not response property order or metadata position', () => {

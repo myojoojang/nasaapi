@@ -53,7 +53,7 @@
 import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
 import type { DailyWeather } from '@/types/nasa';
-import { formatWeatherValue } from '@/features/insight/weatherData';
+import { formatWeatherValue } from '@/utils/insightWeather';
 
 export default defineComponent({
   name: 'SolWeatherCard',

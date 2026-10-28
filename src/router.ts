@@ -10,19 +10,19 @@ export default new VueRouter({
     {
       path: '/',
       component: () => {
-        return import('./features/astronomy/AstronomyPictureView.vue');
+        return import('./views/AstronomyPictureView.vue');
       },
     },
     {
       path: '/insight',
       component: () => {
-        return import('./features/insight/InsightWeatherView.vue');
+        return import('./views/InsightWeatherView.vue');
       },
     },
     {
       path: '/marsphotos',
       component: () => {
-        return import('./features/images/ImageLibraryView.vue');
+        return import('./views/ImageLibraryView.vue');
       },
     },
   ],

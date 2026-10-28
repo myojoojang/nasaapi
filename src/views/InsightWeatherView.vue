@@ -57,9 +57,9 @@
 import { defineComponent } from 'vue';
 import type { DailyWeather } from '@/types/nasa';
 import { nasaApi } from '@/services/nasaApi';
-import { getDailyWeatherReports } from '@/features/insight/weatherData';
-import InsightWeatherCharts from '@/features/insight/InsightWeatherCharts.vue';
-import SolWeatherCard from '@/features/insight/SolWeatherCard.vue';
+import { getDailyWeatherReports } from '@/utils/insightWeather';
+import InsightWeatherCharts from '@/components/InsightWeatherCharts.vue';
+import SolWeatherCard from '@/components/SolWeatherCard.vue';
 
 interface WeatherState {
   weatherReports: DailyWeather[];

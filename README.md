@@ -20,16 +20,13 @@ To use your NASA API key for InSight weather, copy `.env.example` to `.env.local
 
 ```text
 src/
-  features/astronomy/     APOD page
-  features/insight/       InSight page, sol cards, sensor charts, weather data
-  features/images/        NASA image search, cards, pagination
-  components/layout/     Shared navigation and page shell
-  components/media/      Details dialog shared by APOD and library images
-  services/nasaApi.ts     Typed NASA requests
-  types/nasa.ts           NASA response shapes
-  utils/media.ts          Safe media URLs and plain-text APOD metadata
-  router.ts               Existing hash routes
-  styles/app.css          Original green-on-black theme
+  views/                The three route pages
+  components/           Reusable layout, cards, charts, and dialog
+  services/nasaApi.ts   Typed NASA requests
+  types/nasa.ts         NASA response shapes
+  utils/                Weather data formatting and safe media URLs
+  router.ts             Existing hash routes
+  styles/app.css        Original green-on-black theme
 ```
 
 The build uses Vue 2.7, Vuetify 2, Vue Router 3, Chart.js 4, TypeScript, and Vite 7. Pages load by route. CI and Netlify run `npm run check` before deployment. Vue 2 and Vuetify 2 remain to preserve the application’s look; moving to a newer UI stack is a separate project.

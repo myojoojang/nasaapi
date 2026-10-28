@@ -1,5 +1,5 @@
 import type { ChartData } from 'chart.js';
-import type { DailyWeather, InsightWeatherResponse, SolWeather, WeatherMetric } from '../../types/nasa';
+import type { DailyWeather, InsightWeatherResponse, SolWeather, WeatherMetric } from '../types/nasa';
 
 export function getDailyWeatherReports(response: InsightWeatherResponse): DailyWeather[] {
   const solKeys = response.sol_keys ?? [];

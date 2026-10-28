@@ -66,8 +66,8 @@
 import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
 import type { DailyWeather } from '@/types/nasa';
-import { buildWeatherChartData } from '@/features/insight/weatherData';
-import SensorLineChart from './SensorLineChart.vue';
+import { buildWeatherChartData } from '@/utils/insightWeather';
+import SensorLineChart from '@/components/SensorLineChart.vue';
 
 export default defineComponent({
   name: 'InsightWeatherCharts',

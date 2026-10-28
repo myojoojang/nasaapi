@@ -47,7 +47,7 @@ import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
 import type { LibraryImage } from '@/types/nasa';
 import { safeMediaUrl } from '@/utils/media';
-import MediaDetailsDialog from '@/components/media/MediaDetailsDialog.vue';
+import MediaDetailsDialog from '@/components/MediaDetailsDialog.vue';
 
 export default defineComponent({
   name: 'LibraryImageCard',
