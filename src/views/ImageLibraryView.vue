@@ -86,14 +86,14 @@
       </v-btn>
     </v-alert>
     <template v-if="!imagesLoadError">
-      <ImageSearchPagination
+      <ImageLibraryPagination
         :page="currentPage"
         :has-next-page="hasNextPage"
         :is-loading="isLoadingImages"
         @change-page="changePage"
       />
       <v-row class="mt-2">
-        <LibraryImageCard
+        <ImageLibraryCard
           v-for="image in images"
           :key="image.nasa_id"
           :image="image"
@@ -108,7 +108,7 @@
           No images found
         </v-card>
       </v-row>
-      <ImageSearchPagination
+      <ImageLibraryPagination
         :page="currentPage"
         :has-next-page="hasNextPage"
         :is-loading="isLoadingImages"
@@ -122,8 +122,8 @@
 import { defineComponent } from 'vue';
 import type { LibraryImage } from '@/types/nasa';
 import { nasaApi } from '@/services/nasaApi';
-import LibraryImageCard from '@/components/LibraryImageCard.vue';
-import ImageSearchPagination from '@/components/ImageSearchPagination.vue';
+import ImageLibraryCard from '@/components/ImageLibraryCard.vue';
+import ImageLibraryPagination from '@/components/ImageLibraryPagination.vue';
 
 const ROVER_SEARCHES = ['Curiosity rover', 'Perseverance rover', 'Opportunity rover', 'Spirit rover'];
 
@@ -141,8 +141,8 @@ interface ImageLibraryState {
 export default defineComponent({
   name: 'ImageLibraryView',
   components: {
-    LibraryImageCard,
-    ImageSearchPagination,
+    ImageLibraryCard,
+    ImageLibraryPagination,
   },
   data(): ImageLibraryState {
     return {

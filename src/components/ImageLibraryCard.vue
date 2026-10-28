@@ -50,7 +50,7 @@ import { safeMediaUrl } from '@/utils/media';
 import MediaDetailsDialog from '@/components/MediaDetailsDialog.vue';
 
 export default defineComponent({
-  name: 'LibraryImageCard',
+  name: 'ImageLibraryCard',
   components: { MediaDetailsDialog },
   props: {
     image: {

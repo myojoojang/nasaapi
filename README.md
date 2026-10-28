@@ -21,7 +21,7 @@ To use your NASA API key for InSight weather, copy `.env.example` to `.env.local
 ```text
 src/
   views/                The three route pages
-  components/           Reusable layout, cards, charts, and dialog
+  components/           Navigation, image cards, weather charts, and dialog
   services/nasaApi.ts   Typed NASA requests
   types/nasa.ts         NASA response shapes
   utils/                Weather data formatting and safe media URLs

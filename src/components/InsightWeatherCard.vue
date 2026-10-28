@@ -56,7 +56,7 @@ import type { DailyWeather } from '@/types/nasa';
 import { formatWeatherValue } from '@/utils/insightWeather';
 
 export default defineComponent({
-  name: 'SolWeatherCard',
+  name: 'InsightWeatherCard',
   props: {
     weatherReport: {
       type: Object as PropType<DailyWeather>,

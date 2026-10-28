@@ -78,7 +78,7 @@ const weatherChartOptions: ChartOptions<'line'> = {
 };
 
 export default defineComponent({
-  name: 'SensorLineChart',
+  name: 'InsightWeatherChart',
   props: {
     chartData: {
       type: Object as PropType<ChartData<'line', (number | null)[], string>>,

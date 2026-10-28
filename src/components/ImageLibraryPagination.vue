@@ -25,7 +25,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'ImageSearchPagination',
+  name: 'ImageLibraryPagination',
   props: {
     page: {
       type: Number,

@@ -18,7 +18,7 @@
             outlined
             class="chart-container ma-2"
           >
-            <SensorLineChart
+            <InsightWeatherChart
               v-if="chart.hasMeasurements"
               :chart-data="chart.chartData"
               :title="chart.title"
@@ -67,11 +67,11 @@ import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
 import type { DailyWeather } from '@/types/nasa';
 import { buildWeatherChartData } from '@/utils/insightWeather';
-import SensorLineChart from '@/components/SensorLineChart.vue';
+import InsightWeatherChart from '@/components/InsightWeatherChart.vue';
 
 export default defineComponent({
-  name: 'InsightWeatherCharts',
-  components: { SensorLineChart },
+  name: 'InsightWeatherOverview',
+  components: { InsightWeatherChart },
   props: {
     weatherReports: {
       type: Array as PropType<DailyWeather[]>,

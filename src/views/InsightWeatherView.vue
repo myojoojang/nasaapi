@@ -20,7 +20,7 @@
         Try again
       </v-btn>
     </v-alert>
-    <InsightWeatherCharts :weather-reports="weatherReports" />
+    <InsightWeatherOverview :weather-reports="weatherReports" />
     <p
       v-if="!weatherReports.length && !isLoadingWeather && !weatherLoadError"
       class="my-4"
@@ -44,7 +44,7 @@
           </p>
         </v-card>
       </v-col>
-      <SolWeatherCard
+      <InsightWeatherCard
         v-for="report in weatherReports"
         :key="report.sol"
         :weather-report="report"
@@ -58,8 +58,8 @@ import { defineComponent } from 'vue';
 import type { DailyWeather } from '@/types/nasa';
 import { nasaApi } from '@/services/nasaApi';
 import { getDailyWeatherReports } from '@/utils/insightWeather';
-import InsightWeatherCharts from '@/components/InsightWeatherCharts.vue';
-import SolWeatherCard from '@/components/SolWeatherCard.vue';
+import InsightWeatherOverview from '@/components/InsightWeatherOverview.vue';
+import InsightWeatherCard from '@/components/InsightWeatherCard.vue';
 
 interface WeatherState {
   weatherReports: DailyWeather[];
@@ -70,8 +70,8 @@ interface WeatherState {
 export default defineComponent({
   name: 'InsightWeatherView',
   components: {
-    InsightWeatherCharts,
-    SolWeatherCard,
+    InsightWeatherOverview,
+    InsightWeatherCard,
   },
   data(): WeatherState {
     return {
