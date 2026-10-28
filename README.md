@@ -1,8 +1,6 @@
-# NASA API Experiment
+# NASA API Experiment [demo](https://nasaapiexp.netlify.app/)
 
 A Vue dashboard for NASA’s Astronomy Picture of the Day (APOD), InSight weather reports, and NASA library images. The original green-on-black visual style and `#/` and `#/insight` remain; `#/images` is the image route, with `#/marsphotos` redirected for existing links.
-
-## [demo](https://nasaapiexp.netlify.app/#/)
 
 ## Development
 
