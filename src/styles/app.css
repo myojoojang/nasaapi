@@ -1,0 +1,82 @@
+:root {
+  --nasa-accent: #39ff14;
+  --nasa-border: #426a3c;
+  --nasa-muted: #c1d7bc;
+  --nasa-surface: #1b1b1b;
+}
+* {
+  font-family: "Zilla Slab", serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body .theme--dark.v-application {
+  color: #39ff14;
+}
+
+.v-sheet.v-card {
+  border-radius: 0 !important;
+  color: var(--nasa-accent);
+}
+
+.v-btn {
+  border-radius: 0 !important;
+  color: var(--nasa-accent);
+  min-height: 44px;
+}
+
+.theme--dark.v-card.v-sheet--outlined {
+  border: 1px solid var(--nasa-border) !important;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+a {
+  text-decoration: none;
+}
+body .v-application p {
+  margin-bottom: 6px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.page-view {
+  padding: 16px;
+}
+.page-heading {
+  margin-bottom: 24px;
+  max-width: 960px;
+}
+.page-heading h1 {
+  color: var(--nasa-accent);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.page-heading p {
+  color: var(--nasa-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.page-heading a {
+  color: var(--nasa-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.page-panel, .empty-state {
+  background: var(--nasa-surface);
+  border: 1px solid var(--nasa-border);
+  padding: 20px;
+}
+.empty-state {
+  color: var(--nasa-muted);
+  padding: 32px;
+  text-align: center;
+}

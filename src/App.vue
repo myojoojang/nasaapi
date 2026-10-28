@@ -1,88 +1,36 @@
 <template>
   <v-app>
-    <main-view />
+    <v-main>
+      <div class="app-shell">
+        <AppNavigation />
+        <router-view />
+        <footer class="d-flex justify-end mr-4 my-1">
+          Data and imagery from NASA.
+        </footer>
+      </div>
+    </v-main>
   </v-app>
 </template>
 
-<script>
-import MainView from "./components/MainView";
+<script lang="ts">
+import { defineComponent } from 'vue';
+import AppNavigation from './components/AppNavigation.vue';
 
-export default {
-  name: "App",
-
-  components: {
-    MainView,
-  },
-
-  data: () => ({
-    data: [],
-    showLoading: false,
-  }),
-};
+export default defineComponent({
+  name: 'App',
+  components: { AppNavigation },
+});
 </script>
-<style>
-* {
-  font-family: "Zilla Slab", serif;
-}
 
-body {
-  -webkit-transition: all 0.6s ease;
-  -moz-transition: all 0.6s ease;
-  -o-transition: all 0.6s ease;
-  transition: all 0.6s ease;
+<style scoped>
+.app-shell {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 24px;
 }
-
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
-body .theme--dark.v-application {
-  color: #39ff14;
-}
-
-.v-sheet.v-card {
-  border-radius: 0 !important;
-  color: #39ff14;
-}
-
-.v-btn {
-  border-radius: 0 !important;
-  color: #39ff14;
-}
-
-.theme--dark.v-sheet--outlined {
-  border: 1px solid #39ff14 !important;
-}
-.uppercase {
-  text-transform: uppercase;
-}
-.lowercase {
-  text-transform: lowercase;
-}
-a {
-  text-decoration: none;
-}
-body .v-application p {
-  margin-bottom: 6px;
-}
-
-mark {
-  background: #39ff14;
-  font-weight: 700;
-  color: black !important;
-  font-size: 1.2rem;
-}
-.small-text {
-  font-size: 0.8rem;
-}
-
-.bold-outline {
-  border: 2px solid #39ff14 !important;
-  margin: 2px;
-}
-
-.pointer {
-  cursor: pointer;
+@media (max-width: 600px) {
+  .app-shell {
+    padding: 16px;
+  }
 }
 </style>
