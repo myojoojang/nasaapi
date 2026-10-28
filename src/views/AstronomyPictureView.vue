@@ -28,6 +28,15 @@
       </v-btn>
     </v-alert>
     <template v-if="astronomyPicture">
+      <v-btn
+        outlined
+        color="primary"
+        class="ma-4"
+        aria-label="View astronomy picture details"
+        @click="isDetailsOpen = true"
+      >
+        View details
+      </v-btn>
       <v-img
         v-if="pictureImageUrl"
         class="pointer"
@@ -52,15 +61,6 @@
           Watch on NASA
         </v-btn>
       </div>
-      <v-btn
-        outlined
-        color="primary"
-        class="ma-4"
-        aria-label="View astronomy picture details"
-        @click="isDetailsOpen = true"
-      >
-        View details
-      </v-btn>
       <v-dialog
         v-model="isDetailsOpen"
         scrollable
@@ -91,7 +91,11 @@
 import { defineComponent } from 'vue';
 import type { AstronomyPicture } from '@/types/nasa';
 import { nasaApi } from '@/services/nasaApi';
-import { getAstronomyImageUrl, safeMediaUrl, plainTextFromHtml } from '@/utils/media';
+import {
+  getAstronomyImageUrl,
+  safeMediaUrl,
+  plainTextFromHtml,
+} from '@/utils/media';
 import MediaDetailsDialog from '@/components/MediaDetailsDialog.vue';
 
 interface AstronomyState {
@@ -126,7 +130,9 @@ export default defineComponent({
       return getAstronomyImageUrl(this.astronomyPicture);
     },
     pictureSourceUrl(): string {
-      return safeMediaUrl(this.astronomyPicture?.permalink || this.astronomyPicture?.url);
+      return safeMediaUrl(
+        this.astronomyPicture?.permalink || this.astronomyPicture?.url,
+      );
     },
   },
   created() {
