@@ -27,7 +27,7 @@
         class="nav-tab"
         exact-active-class="nav-tab--active"
       >
-        Insight
+        Insight Mars
       </router-link>
       <router-link
         to="/images"
