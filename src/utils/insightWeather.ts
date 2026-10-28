@@ -26,14 +26,23 @@ export function buildWeatherChartData(
     {
       field: 'av',
       label: 'Average',
+      color: '#39ff14',
+      pointStyle: 'circle',
+      borderDash: [],
     },
     {
       field: 'mn',
       label: 'Minimum',
+      color: '#4dd0e1',
+      pointStyle: 'rectRot',
+      borderDash: [6, 4],
     },
     {
       field: 'mx',
       label: 'Maximum',
+      color: '#ffb74d',
+      pointStyle: 'triangle',
+      borderDash: [2, 4],
     },
   ] as const;
 
@@ -47,13 +56,17 @@ export function buildWeatherChartData(
         data: weatherReports.map((report) => {
           return report[metric]?.[measurement.field] ?? null;
         }),
-        borderWidth: 3,
-        pointRadius: 3,
+        borderColor: measurement.color,
+        backgroundColor: measurement.color,
+        borderDash: [...measurement.borderDash],
+        borderWidth: measurement.field === 'av' ? 3 : 2,
+        pointStyle: measurement.pointStyle,
+        pointRadius: 4,
+        pointHoverRadius: 7,
+        pointBackgroundColor: measurement.color,
+        pointHoverBackgroundColor: measurement.color,
         fill: false,
         spanGaps: false,
-        borderColor: '#30DA11',
-        pointHoverBackgroundColor: '#30DA11',
-        pointHoverRadius: 6,
       };
     }),
   };

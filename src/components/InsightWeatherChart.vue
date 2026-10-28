@@ -33,49 +33,64 @@ Chart.register(
   Tooltip,
 );
 
-const weatherChartOptions: ChartOptions<'line'> = {
-  responsive: true,
-  maintainAspectRatio: false,
-  animation: false,
-  plugins: {
-    legend: {
-      display: true,
-      labels: {
-        usePointStyle: true,
-        font: { size: 12 },
-        boxWidth: 8,
-        color: '#30DA11',
-      },
+function createWeatherChartOptions(unit: string): ChartOptions<'line'> {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: false,
+    interaction: {
+      mode: 'index',
+      intersect: false,
     },
-    tooltip: { displayColors: false },
-  },
-  scales: {
-    x: {
-      grid: { display: false },
-      ticks: {
-        color: '#30DA11',
-        font: { size: 12 },
-        autoSkipPadding: 20,
-        maxRotation: 0,
+    plugins: {
+      legend: {
+        position: 'top',
+        align: 'start',
+        labels: {
+          usePointStyle: true,
+          color: '#e8f5e5',
+          padding: 16,
+          font: { size: 13 },
+        },
       },
-    },
-    y: {
-      beginAtZero: false,
-      grid: { display: false },
-      ticks: {
-        color: '#30DA11',
-        font: { size: 12 },
-        callback(value) {
-          if (Number(value) >= 1000) {
-            return `${Intl.NumberFormat().format(Number(value) / 1000)}k`;
-          }
-
-          return value;
+      tooltip: {
+        callbacks: {
+          label(context) {
+            return `${context.dataset.label}: ${context.formattedValue} ${unit}`;
+          },
         },
       },
     },
-  },
-};
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Martian sol',
+          color: '#c8d8c4',
+        },
+        grid: { display: false },
+        ticks: {
+          color: '#c8d8c4',
+          maxRotation: 0,
+          autoSkipPadding: 20,
+        },
+      },
+      y: {
+        grace: '10%',
+        title: {
+          display: true,
+          text: unit,
+          color: '#c8d8c4',
+        },
+        grid: { color: 'rgba(200, 216, 196, 0.16)' },
+        ticks: {
+          color: '#c8d8c4',
+          maxTicksLimit: 6,
+        },
+      },
+    },
+  };
+}
 
 export default defineComponent({
   name: 'InsightWeatherChart',
@@ -85,6 +100,10 @@ export default defineComponent({
       required: true,
     },
     title: {
+      type: String,
+      required: true,
+    },
+    unit: {
       type: String,
       required: true,
     },
@@ -102,7 +121,7 @@ export default defineComponent({
       chart = new Chart(canvas.value, {
         type: 'line',
         data: props.chartData,
-        options: weatherChartOptions,
+        options: createWeatherChartOptions(props.unit),
       });
     }
 
@@ -122,7 +141,6 @@ export default defineComponent({
 <style scoped>
 .weather-chart {
   position: relative;
-  height: 28vh;
-  min-height: 180px;
+  height: 280px;
 }
 </style>
