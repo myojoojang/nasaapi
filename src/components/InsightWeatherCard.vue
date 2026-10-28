@@ -12,19 +12,19 @@
         <h2 class="font-weight-bold">
           Sol {{ weatherReport.sol }}
         </h2>
-        <p>&gt;{{ reportDate }}</p>
+        <p>{{ reportDate }}</p>
       </div>
       <p class="uppercase font-weight-bold">
         Northern Season
       </p>
-      <p class="ml-2">
-        &gt;{{ weatherReport.Northern_season || 'N/D' }}
+      <p class="ml-4">
+        {{ weatherReport.Northern_season || 'N/D' }}
       </p>
       <p class="uppercase font-weight-bold">
         Southern Season
       </p>
-      <p class="ml-2">
-        &gt;{{ weatherReport.Southern_season || 'N/D' }}
+      <p class="ml-4">
+        {{ weatherReport.Southern_season || 'N/D' }}
       </p>
       <section
         v-for="section in measurementSections"
@@ -33,17 +33,17 @@
         <p class="uppercase font-weight-bold">
           {{ section.title }}
         </p>
-        <div class="ml-2">
-          <p>&gt;Average: {{ formatWeatherValue(section.measurement?.av, section.unit) }}</p>
-          <p>&gt;Max: {{ formatWeatherValue(section.measurement?.mx, section.unit) }}</p>
-          <p>&gt;Min: {{ formatWeatherValue(section.measurement?.mn, section.unit) }}</p>
+        <div class="ml-4">
+          <p>Average: {{ formatWeatherValue(section.measurement?.av, section.unit) }}</p>
+          <p>Max: {{ formatWeatherValue(section.measurement?.mx, section.unit) }}</p>
+          <p>Min: {{ formatWeatherValue(section.measurement?.mn, section.unit) }}</p>
         </div>
       </section>
       <p class="uppercase font-weight-bold">
         Wind Direction
       </p>
-      <p class="ml-2">
-        &gt;{{ windDirection }}
+      <p class="ml-4">
+        {{ windDirection }}
       </p>
     </v-card>
   </v-col>
@@ -75,7 +75,9 @@ export default defineComponent({
         return 'N/D';
       }
 
-      return new Date(timestamp).toLocaleDateString('en-US', { timeZone: 'UTC' });
+      return new Date(timestamp).toLocaleDateString('en-US', {
+        timeZone: 'UTC',
+      });
     },
     windDirection(): string {
       return this.weatherReport.WD?.most_common?.compass_point ?? 'N/D';
