@@ -2,6 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { getDailyWeatherReports, buildWeatherChartData, formatWeatherValue } from '../src/utils/insightWeather';
 import type { DailyWeather } from '../src/types/nasa';
+import { insightWeatherArchive } from '../src/data/insightWeather';
+
+test('archived weather data contains NASA’s seven dated reports', () => {
+  const reports = getDailyWeatherReports(insightWeatherArchive);
+
+  assert.deepEqual(reports.map((report) => {
+    return report.sol;
+  }), ['675', '676', '677', '678', '679', '680', '681']);
+  assert.equal(reports[0].Last_UTC, '2020-10-20T19:11:55Z');
+  assert.equal(reports[6].Last_UTC, '2020-10-26T23:09:26Z');
+  assert.equal(reports[0].AT?.av, -62.314);
+  assert.equal(reports[6].PRE?.av, 743.55);
+});
 
 test('weather reports follow sol_keys, not response property order or metadata position', () => {
   const response = {

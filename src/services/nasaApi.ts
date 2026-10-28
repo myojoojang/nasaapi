@@ -1,14 +1,11 @@
 import type {
   AstronomyPicture,
-  InsightWeatherResponse,
   ImageLibrarySearchResponse,
   LibraryImageSearch,
 } from '../types/nasa';
 
-const NASA_API_URL = 'https://api.nasa.gov';
 const APOD_API_URL = 'https://science.nasa.gov/wp-json/wp/v2/apod-basic';
 const IMAGE_LIBRARY_URL = 'https://images-api.nasa.gov/search';
-const nasaApiKey = import.meta.env?.VITE_NASA_API_KEY || 'DEMO_KEY';
 
 async function fetchNasaJson<ResponseData>(
   endpoint: string,
@@ -35,13 +32,6 @@ export const nasaApi = {
     }
 
     return response;
-  },
-  async fetchInsightWeather(): Promise<InsightWeatherResponse> {
-    return fetchNasaJson<InsightWeatherResponse>(`${NASA_API_URL}/insight_weather/`, {
-      api_key: nasaApiKey,
-      feedtype: 'json',
-      ver: '1.0',
-    });
   },
   async searchLibraryImages(searchTerms: string, page: number): Promise<LibraryImageSearch> {
     const response = await fetchNasaJson<ImageLibrarySearchResponse>(IMAGE_LIBRARY_URL, {

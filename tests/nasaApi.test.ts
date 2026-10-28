@@ -92,16 +92,3 @@ test('image searches handle an empty last page', async () => {
   assert.deepEqual(result.images, []);
   assert.equal(result.hasNextPage, false);
 });
-
-test('weather requests use the documented version and reject failed HTTP responses', async () => {
-  let request: URL | null = null;
-
-  globalThis.fetch = async (input) => {
-    request = new URL(String(input));
-
-    return new Response('Rate limited', { status: 429 });
-  };
-  await assert.rejects(nasaApi.fetchInsightWeather(), /429/);
-  assert.ok(request);
-  assert.equal((request as URL).searchParams.get('ver'), '1.0');
-});

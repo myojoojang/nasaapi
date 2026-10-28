@@ -1,8 +1,8 @@
 <template>
   <div>
     <header class="page-heading">
-      <h1>InSight: Mars Weather Service API</h1>
-      <p>Per-sol summaries from the last available Martian days.</p>
+      <h1>InSight Weather Archive</h1>
+      <p>NASA’s last available reports: October 20–26, 2020 (sols 675–681).</p>
       <p>Missing sensor readings appear as gaps in the charts.</p>
       <a
         href="https://science.nasa.gov/mission/insight/"
